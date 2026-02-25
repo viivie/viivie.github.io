@@ -5,3 +5,9 @@ theme = "hugo-theme-reimu"
 
 [params]
   mainSections = ["posts"]
+
+  # 瀏覽器分頁圖示 (Favicon)
+  favicon = "/ArZzoLch.ico"
+  
+  # 如果你想換掉主題裡的頭像
+  # avatar = "/avatar.png"
