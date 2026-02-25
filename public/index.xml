@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>viivie 的貓窩</title>
+    <link>http://localhost:1313/</link>
+    <description>Recent content from viivie 的貓窩</description>
+    <generator>Hugo</generator>
+    <language>zh-tw</language>
+    
+    <managingEditor>xxx@example.com (D-Sketon)</managingEditor>
+    <webMaster>xxx@example.com (D-Sketon)</webMaster>
+    
+    <copyright>本部落格所有文章除特別聲明外，均採用 BY-NC-SA 授權協議。轉載請註明出處！</copyright>
+    
+    <lastBuildDate>Wed, 25 Feb 2026 02:00:52 +0800</lastBuildDate>
+    
+    
+    <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss&#43;xml" />
+    
+
+    
+    
+
+    <item>
+      <title>Hello World</title>
+      <link>http://localhost:1313/posts/hello-world/</link>
+      <pubDate>Wed, 25 Feb 2026 02:00:52 &#43;0800</pubDate>
+      <author>xxx@example.com (D-Sketon)</author>
+      <guid>http://localhost:1313/posts/hello-world/</guid>
+      <description>
+        <![CDATA[<h1>Hello World</h1><p>作者：D-Sketon（xxx@example.com）</p>
+        
+          <p>真的來認真弄blog了，以前哪個建完就荒廢了.w.</p>
+<p>這應該不會(吧</p>
+<p>然後主題在慢慢改吧
+我現在好懶</p>
+        
+        <hr><p>本文2026-02-25首發於<a href='http://localhost:1313/'>viivie 的貓窩</a>，最後修改於2026-02-25</p>]]>
+      </description>
+      
+    </item>
+    
+  </channel>
+</rss>
