@@ -16,17 +16,29 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          submodules: recursive # 確保抓到 Reimu 主題內容
+          submodules: recursive
           fetch-depth: 0
 
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@v3
         with:
           hugo-version: 'latest'
-          extended: true # <--- 這是解決 SCSS 報錯的唯一關鍵！
+          extended: true
 
       - name: Build
         run: hugo --minify
 
-      - name: Deploy
+      # === 這是你漏掉的關鍵步驟 ===
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./public
+      # ==========================
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
         uses: actions/deploy-pages@v4
