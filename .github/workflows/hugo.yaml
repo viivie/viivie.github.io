@@ -28,16 +28,19 @@ jobs:
       - name: Build
         run: hugo --minify
 
-      # === 這是你漏掉的關鍵步驟 ===
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: ./public
-      # ==========================
 
   deploy:
     runs-on: ubuntu-latest
     needs: build
+    # === 補上這幾行就大功告成了 ===
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    # ==========================
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
