@@ -1,0 +1,7 @@
+baseURL = 'https://viivie.github.io/'
+languageCode = 'zh-tw'
+title = 'viivie 的貓窩'
+theme = "hugo-theme-reimu"
+
+[params]
+  mainSections = ["posts"]
