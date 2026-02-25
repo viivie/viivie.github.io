@@ -16,14 +16,14 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          submodules: recursive # 確保有抓到主題
+          submodules: recursive # 確保抓到 Reimu 主題內容
           fetch-depth: 0
 
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@v3
         with:
           hugo-version: 'latest'
-          extended: true # <--- 關鍵！一定要啟動擴展版來處理 SCSS
+          extended: true # <--- 這是解決 SCSS 報錯的唯一關鍵！
 
       - name: Build
         run: hugo --minify
