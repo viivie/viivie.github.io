@@ -1,0 +1,8 @@
+git add .
+git commit -m ""
+git push
+
+
+make new
+
+hugo new posts/filename.md
