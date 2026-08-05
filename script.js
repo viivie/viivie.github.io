@@ -5,63 +5,97 @@ let webcam;
 let maxPredictions;
 let labelContainer;
 
+let currentFacingMode = "environment";
+
 document
 .getElementById("startBtn")
-.addEventListener("click", init);
+.onclick = startCamera;
 
-async function init(){
+document
+.getElementById("switchBtn")
+.onclick = switchCamera;
 
-    try{
+async function loadModel(){
 
-        document.getElementById("status").innerText="載入模型中...";
+    if(model) return;
 
-        model = await tmImage.load(
-            URL+"model.json",
-            URL+"metadata.json"
-        );
+    model = await tmImage.load(
+        URL+"model.json",
+        URL+"metadata.json"
+    );
 
-        maxPredictions=model.getTotalClasses();
+    maxPredictions=model.getTotalClasses();
 
-        webcam=new tmImage.Webcam(300,300,true);
+}
 
-        await webcam.setup();
+async function startCamera(){
 
-        await webcam.play();
+    document.getElementById("status").innerText="Loading model...";
 
-        window.requestAnimationFrame(loop);
+    await loadModel();
 
-        document
+    if(webcam){
+
+        webcam.stop();
+
+        document.getElementById("webcam-container").innerHTML="";
+    }
+
+    webcam=new tmImage.Webcam(
+        400,
+        400,
+        currentFacingMode==="user"
+    );
+
+    await webcam.setup({
+        facingMode:currentFacingMode
+    });
+
+    await webcam.play();
+
+    window.requestAnimationFrame(loop);
+
+    document
         .getElementById("webcam-container")
         .appendChild(webcam.canvas);
 
-        labelContainer=document.getElementById("label-container");
+    labelContainer=document.getElementById("label-container");
 
-        labelContainer.innerHTML="";
+    labelContainer.innerHTML="";
 
-        for(let i=0;i<maxPredictions;i++){
+    for(let i=0;i<maxPredictions;i++){
 
-            const row=document.createElement("div");
+        const div=document.createElement("div");
 
-            row.className="result";
+        div.className="result";
 
-            row.innerHTML=`
+        div.innerHTML=`
+            <div class="result-title">
                 <span></span>
-                <progress value="0" max="100"></progress>
-            `;
+                <span class="percent"></span>
+            </div>
 
-            labelContainer.appendChild(row);
+            <progress max="100" value="0"></progress>
+        `;
 
-        }
-
-        document.getElementById("status").innerText="辨識中";
-
-    }catch(e){
-
-        console.error(e);
-
-        document.getElementById("status").innerText="載入失敗";
+        labelContainer.appendChild(div);
 
     }
+
+    document.getElementById("status").innerText="Running";
+
+    document.getElementById("switchBtn").disabled=false;
+
+}
+
+async function switchCamera(){
+
+    currentFacingMode =
+        currentFacingMode==="environment"
+        ? "user"
+        : "environment";
+
+    await startCamera();
 
 }
 
@@ -77,21 +111,23 @@ async function loop(){
 
 async function predict(){
 
-    const prediction=await model.predict(webcam.canvas);
+    const prediction=
+        await model.predict(webcam.canvas);
 
     for(let i=0;i<prediction.length;i++){
 
+        const percent=(prediction[i].probability*100);
+
         const row=labelContainer.children[i];
 
-        const span=row.querySelector("span");
+        row.querySelector("span").innerText=
+            prediction[i].className;
 
-        const progress=row.querySelector("progress");
+        row.querySelector(".percent").innerText=
+            percent.toFixed(1)+"%";
 
-        const percent=(prediction[i].probability*100).toFixed(1);
-
-        span.innerHTML=`${prediction[i].className} ${percent}%`;
-
-        progress.value=percent;
+        row.querySelector("progress").value=
+            percent;
 
     }
 

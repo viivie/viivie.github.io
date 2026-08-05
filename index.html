@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-TW">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
@@ -14,24 +14,24 @@
 
 <body>
 
-    <div class="container">
+<div class="container">
 
-        <h1>AI Image Classifier</h1>
+    <h1>AI Image Classifier</h1>
 
-        <button id="startBtn">開始辨識</button>
-
-        <div id="status">
-            尚未啟動
-        </div>
-
-        <div id="webcam-container"></div>
-
-        <div id="label-container"></div>
-
+    <div class="buttons">
+        <button id="startBtn">Start Camera</button>
+        <button id="switchBtn" disabled>Switch Camera</button>
     </div>
 
-    <script src="script.js"></script>
+    <div id="status">Ready</div>
+
+    <div id="webcam-container"></div>
+
+    <div id="label-container"></div>
+
+</div>
+
+<script src="script.js"></script>
 
 </body>
-
 </html>
